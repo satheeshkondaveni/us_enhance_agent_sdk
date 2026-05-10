@@ -15,7 +15,7 @@ if __name__ == "__main__":
     agent = StoryEnhancer(
         username="dev_user",
         password="secure_pass",
-        genai_model="ollama",
+        genai_model="deepseek",
         embedding_model="bge"   # Using BGE embedding model
     )
 

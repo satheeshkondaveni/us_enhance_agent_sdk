@@ -1,0 +1,13 @@
+Return the result strictly in JSON format:
+{
+  "message": "success",
+  "status": true,
+  "user_feedback": "<feedback applied>",
+  "user_stories": [
+    {
+      "title": "<enhanced title>",
+      "description": "<enhanced description>",
+      "acceptance_criteria": "<enhanced acceptance criteria>"
+    }
+  ]
+}

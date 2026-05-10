@@ -49,7 +49,7 @@ class StoryEnhancer:
             {prompts['output']}
             """
             enhanced_output = model.generate(prompt)
-            embed_vector = embed_model.embed(enhanced_output)  # semantic validation
+            # embed_vector = embed_model.embed(enhanced_output)  # semantic validation
             enhanced_stories.append(enhanced_output)
 
         return {
