@@ -1,0 +1,26 @@
+# Core Python libraries
+pydantic==2.7.0
+python-dotenv==1.0.1
+
+# HTTP requests
+requests==2.31.0
+
+# Async support
+aiohttp==3.9.5
+
+# Logging
+loguru==0.7.2
+
+# HuggingFace for BGE embeddings
+transformers==4.40.1
+sentence-transformers==3.0.1
+torch>=2.2.0
+
+# Ollama client (if using Python SDK wrapper)
+ollama==0.1.7
+
+# Cohere client (optional embedding model)
+cohere==5.3.4
+
+# Testing
+pytest==8.2.0

@@ -632,5 +632,92 @@ Here’s a **deployment diagram** that shows how your SDK (`us_enhance_agent_sdk
 
 ---
 
-✅ This deployment diagram shows how your SDK is **packaged, imported, and interacts with external services** in a clean, layered way.  
+Here’s a **graph diagram** that visualizes the LangGraph agent workflow as a flowchart with nodes and edges. This shows how a request flows through authentication, model selection, prompt loading, and story enhancement:
 
+---
+
+## 📊 LangGraph Agent Workflow Diagram
+
+```
+        ┌───────────────────┐
+        │       User        │
+        │  (input JSON)     │
+        └─────────┬─────────┘
+                  │
+                  v
+        ┌───────────────────┐
+        │  Authenticator    │
+        │ validate_user()   │
+        └─────────┬─────────┘
+                  │ authorized
+                  v
+        ┌───────────────────┐
+        │   ModelManager    │
+        │ connect()         │
+        │ - Ollama (GenAI)  │
+        │ - BGE (Embedding) │
+        └─────────┬─────────┘
+                  │ models ready
+                  v
+        ┌───────────────────┐
+        │   PromptLoader    │
+        │ load_prompts()    │
+        │ - system.txt      │
+        │ - user.txt        │
+        │ - output.txt      │
+        └─────────┬─────────┘
+                  │ prompts ready
+                  v
+        ┌───────────────────┐
+        │  StoryEnhancer    │
+        │ enhance_userstories() 
+        │ - Apply feedback  │
+        │ - Use Ollama GenAI│
+        │ - Validate w/ BGE │
+        └─────────┬─────────┘
+                  │ enhanced JSON
+                  v
+        ┌───────────────────┐
+        │       User        │
+        │  (final output)   │
+        └───────────────────┘
+```
+
+---
+
+## 🔄 Flow Explanation
+
+1. **User Node**  
+   - Provides input JSON with user stories and feedback.  
+
+2. **Authenticator Node**  
+   - Validates username, password, and chosen models.  
+   - If authorized, passes control forward.  
+
+3. **ModelManager Node**  
+   - Loads `.env` configs.  
+   - Connects to **Ollama** (for GenAI generation).  
+   - Connects to **BGE** (for embeddings validation).  
+
+4. **PromptLoader Node**  
+   - Loads system, user, and output format prompts.  
+   - Injects user feedback dynamically.  
+
+5. **StoryEnhancer Node**  
+   - Sends prompts + user stories to Ollama for enhancement.  
+   - Uses BGE embeddings to validate semantic consistency.  
+   - Produces enhanced JSON output.  
+
+6. **User Node (Output)**  
+   - Receives final enhanced JSON with improved titles, descriptions, and acceptance criteria.  
+
+---
+
+## 🏗️ Design Pattern Mapping
+- **Nodes = Components** (Authenticator, ModelManager, PromptLoader, StoryEnhancer).  
+- **Edges = Data Flow** (input JSON → validation → model connection → prompt injection → enhancement → output).  
+- **Middleware** (logging, error handling) wraps around edges for observability and resilience.  
+
+---
+
+This diagram makes it clear that the agent is a **graph of loosely coupled nodes**, each with a single responsibility, connected by well-defined edges.  
